@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Roboto', sans-serif; }
+
+.mat-fab-fontAwesome {
+    font-size: 140%;
+    transform: translate(0, 4px);
+}
+.mat-icon-fontAwesome {
+    font-size: 120%;
+    transform: translate(0, 0);
+}

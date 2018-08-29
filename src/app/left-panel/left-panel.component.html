@@ -1,0 +1,22 @@
+<mat-toolbar color="primary">My Tjm</mat-toolbar>
+<mat-nav-list>
+  <mat-list-item>
+    <mat-icon mat-list-icon fontSet='far' fontIcon='fa-calendar-alt'></mat-icon>
+    <a mat-line routerLink='/home' routerLinkActive='active'>Accueil</a>
+  </mat-list-item>
+  <mat-list-item>
+      <mat-icon mat-list-icon fontSet='fas' fontIcon='fa-receipt'></mat-icon>
+      <a mat-line routerLink='/invoices' routerLinkActive='active'>Factures</a>
+    </mat-list-item>
+  <mat-divider></mat-divider>
+
+  <mat-list-item>
+      <mat-icon mat-list-icon fontSet='far' fontIcon='fa-address-card'></mat-icon>
+      <a mat-line routerLink='/clients' routerLinkActive='active'>Clients</a>
+    </mat-list-item>
+
+  <mat-list-item>
+    <mat-icon mat-list-icon fontSet='fas' fontIcon='fa-cogs'></mat-icon>
+    <a mat-line routerLink='/parameters' routerLinkActive='active'>Paramètres</a>
+  </mat-list-item>
+</mat-nav-list>

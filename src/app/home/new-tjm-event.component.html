@@ -1,0 +1,29 @@
+<form [formGroup]="form" (ngSubmit)='onSubmit()'>
+  <h2 mat-dialog-title>Nouveau Tjm</h2>
+  <mat-dialog-content>
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Client" formControlName='client'>
+          <mat-option *ngFor="let client of clients" [value]="client">{{client.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div style="margin-bottom: 20px">
+      <mat-checkbox formControlName='isMorning'>Matin</mat-checkbox>
+      <mat-checkbox formControlName='isAfternoon' style="margin-left: 20px;">Après-midi</mat-checkbox>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Coût" type="number" formControlName="cost" [errorStateMatcher]='matcher'>
+        <mat-error *ngIf="form.get('cost').hasError('required')">
+          Le coût est obligatoire
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)='cancel()'>Annuler</button>
+    <button mat-raised-button color='primary' type='submit'>Enregistrer</button>
+  </mat-dialog-actions>
+</form>

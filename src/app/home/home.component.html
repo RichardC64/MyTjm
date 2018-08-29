@@ -1,0 +1,55 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+    <app-left-panel></app-left-panel>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" style="z-index: 999">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Accueil</span>
+      <span style="flex: 1 1 auto"></span>
+      <app-ms-connect></app-ms-connect>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <div class='sidenavcontent-content'>
+      <div *ngIf='isWorking' class='center-spinner'>
+        <mat-spinner></mat-spinner>
+      </div>
+
+      <div>
+        <button mat-icon-button (click)='onChangeMonth(-1)'>
+          <mat-icon fontSet='fas' fontIcon='fa-caret-left' class="mat-icon-fontAwesome"></mat-icon>
+        </button>
+        <span class="mat-title">{{currentDate | date: 'MMM yyyy'}}</span>
+        <button mat-icon-button (click)='onChangeMonth(+1)'>
+          <mat-icon fontSet='fas' fontIcon='fa-caret-right' class="mat-icon-fontAwesome"></mat-icon>
+        </button>
+        <span class="mat-title">{{monthlyIncomes | currency:'EUR':'symbol': '1.0-0'}}</span>
+      </div>
+
+
+      <div fxLayout='row wrap' fxLayoutAlign='start stretch' fxLayoutGap='10px'>
+        <div fxFlex='calc(20% - 10px)' fxFlex.xs='calc(100% - 10px)' fxFlexFill *ngFor='let cardData of cardDatas' style="padding-bottom: 10px;">
+          <mat-card [style.background-color]='cardData.date | dayBackground:currentDate'>
+            <mat-card-title>{{cardData.date | date:'E dd MMM'}}</mat-card-title>
+            <mat-card-content>
+              <mat-chip-list #chipList>
+                <mat-chip *ngFor="let tjmEvent of cardData.tjmEvents" selected removable="true" (removed)="remove(tjmEvent)" [color]='tjmEvent | eventColor'>
+                  {{tjmEvent.datas.client.name}}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+              </mat-chip-list>
+            </mat-card-content>
+            <mat-action-row>
+              <button mat-icon-button>
+                <mat-icon fontSet='fas' fontIcon='fa-plus' (click)='create(cardData.date)'></mat-icon>
+              </button>
+            </mat-action-row>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,22 @@
+<form [formGroup]="form" (ngSubmit)='onSubmit()'>
+  <h2 mat-dialog-title>Nouveau client</h2>
+  <mat-dialog-content>
+    <mat-form-field style="padding: 20px;">
+      <input matInput placeholder="Nom" type="text" formControlName="name" [errorStateMatcher]='matcher'>
+      <mat-error *ngIf="form.get('name').hasError('required')">
+        Le nom est obligatoire
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field style="padding: 20px;">
+      <input matInput placeholder="Taux journalier" type="number" formControlName="tauxJournalier" [errorStateMatcher]='matcher'>
+      <mat-error *ngIf="form.get('tauxJournalier').hasError('required')">
+        Le taux journalier doit être supérieur à 100
+      </mat-error>
+    </mat-form-field>
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)='cancel()'>Annuler</button>
+    <button mat-raised-button color='primary' type='submit'>Enregistrer</button>
+  </mat-dialog-actions>
+</form>

@@ -1,0 +1,10 @@
+<ng-container *ngIf='me'>
+  <img appHttpSrc='https://graph.microsoft.com/v1.0/me/photo/$value' class='mat-mini-fab' [matMenuTriggerFor]="menu">
+
+  <mat-menu #menu="matMenu" yPosition="below" [overlapTrigger]="false">
+    <button mat-menu-item (click)='onLogout()'>
+      <mat-icon fontSet='fas' fontIcon='fa-sign-out-alt' class='mat-icon-fontAwesome'></mat-icon>
+      <span>Déconnexion</span>
+    </button>
+  </mat-menu>
+</ng-container>

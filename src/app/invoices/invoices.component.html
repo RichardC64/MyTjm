@@ -1,0 +1,63 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+    <app-left-panel></app-left-panel>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" style="z-index: 999">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Accueil</span>
+      <span style="flex: 1 1 auto"></span>
+      <app-ms-connect></app-ms-connect>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <div class='sidenavcontent-content'>
+      <div *ngIf='isWorking' class='center-spinner'>
+        <mat-spinner></mat-spinner>
+      </div>
+
+      <div fxLayout='row noWrap' fxLayoutAlign='space-between start' style='width: 100%;'>
+        <div fxFlex>
+          <button mat-icon-button (click)='onChangeMonth(-1)'>
+            <mat-icon fontSet='fas' fontIcon='fa-caret-left' class="mat-icon-fontAwesome"></mat-icon>
+          </button>
+          <span class="mat-title">{{currentDate | date: 'MMM yyyy'}}</span>
+          <button mat-icon-button (click)='onChangeMonth(+1)'>
+            <mat-icon fontSet='fas' fontIcon='fa-caret-right' class="mat-icon-fontAwesome"></mat-icon>
+          </button>
+          <span class="mat-title">{{monthlyIncomes | currency:'EUR':'symbol':'1.0-0'}}</span>
+        </div>
+      
+      <div fxFlex style='text-align: right'>
+        <mat-slide-toggle [(ngModel)]='showCost'>Jours/Coûts</mat-slide-toggle>
+      </div></div>
+
+      <mat-card *ngFor='let groupItem of groups' style='margin-bottom: 20px;'>
+        <mat-card-title>{{groupItem.tjmEvents[0].datas.client.name}} : {{getClientTotalCost(groupItem.tjmEvents) | currency:
+          'EUR':'symbol': '1.0-0'}}</mat-card-title>
+
+        <mat-card-content>
+          <div fxLayout='row wrap' fxLayoutAlign='start start' id='tb'>
+            <div fxFlex='60px' *ngFor='let dayCost of groupItem.dayCosts' class='dayBox' [ngClass]="dayCost.date.day() === 5 ? 'fridayBox': ''">
+              <div class='dayBox-separator dayBox-item'>{{dayCost.date.date()}}</div>
+              <div class='dayBox-item' *ngIf='!showCost'>{{dayCost.number === 0 ? '&nbsp;': dayCost.number}}</div>
+              <div class='dayBox-item' *ngIf='showCost'>{{dayCost.cost === 0 ? '&nbsp;': dayCost.cost | currency:
+                'EUR':'symbol':'1.0-0'}}</div>
+            </div>
+            <div fxFlex='120px' class='dayBox'>
+              <div class='dayBox-separator dayBox-item'>Total</div>
+              <div class='dayBox-item'*ngIf='!showCost'>{{groupItem.tjmEvents.length/2}} j</div>
+              <div class='dayBox-item'*ngIf='showCost'>{{getClientTotalCost(groupItem.tjmEvents) | currency: 'EUR':'symbol':
+                '1.0-0'}}</div>
+            </div>
+          </div>
+        </mat-card-content>
+<mat-card-actions>
+  <button mat-icon-button><mat-icon fontSet='fas' fontIcon='fa-download'></mat-icon></button>
+  </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

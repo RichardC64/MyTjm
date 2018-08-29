@@ -1,0 +1,46 @@
+.sidenav-container {
+    height: 100%;
+  }
+  
+  .sidenav {
+    width: 200px;
+    box-shadow: 3px 0 6px rgba(0,0,0,.24);
+  }
+  
+  .mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+  }
+
+  // le contenu du sidenav sans le toolbar
+.sidenavcontent-content {
+  padding: 8px;
+}
+
+.fixed-button {
+  position: fixed; 
+  bottom: 20px;
+  right: 20px;
+}
+
+.mat-fab-fontAwesome {
+  font-size: 140%;
+  transform: translate(0, 4px);
+}
+.mat-icon-fontAwesome {
+  font-size: 120%;
+  transform: translate(0, 0);
+}
+
+.center-spinner {
+  position: absolute;
+top:0;
+bottom: 0;
+left: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+
+  margin: auto;
+  z-index: 9999;
+}

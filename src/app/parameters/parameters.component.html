@@ -1,0 +1,34 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+    <app-left-panel></app-left-panel>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Paramètres</span>
+      <span style="flex: 1 1 auto"></span>
+      <app-ms-connect></app-ms-connect>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <div class='sidenavcontent-content'>
+      <div *ngIf='isWorking'>Working...</div>
+      <form [formGroup]="form" (ngSubmit)='onSubmit()'>
+        <div style='max-width: 400px;margin: 0 auto 0 auto'>
+          <mat-form-field style='width: 100%'>
+            <mat-select formControlName="selectedCalendar" placeholder="Calendrier">
+              <mat-option *ngFor="let calendar of calendars" [value]="calendar">
+                {{calendar.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div style='text-align: right;'>
+            <button mat-raised-button color='primary' type='submit'>Enregistrer</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
