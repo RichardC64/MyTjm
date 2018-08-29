@@ -1,3 +1,5 @@
+![c2i.fr](http://www.c2i.fr/Media/Default/BlogPost/articles/angular-microsoft-graph-part-1/AngularMSGraph.png "c2i.fr")
+
 # MyTjm
 Une application Angular cliente de Microsoft Graph.
 
